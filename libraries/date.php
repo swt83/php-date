@@ -133,30 +133,8 @@ class Date
 		// catch error
 		if ($diff === false) return false;
 		
-		// filter result
-		$filter = array(
-			'y' => 'years',
-			'm' => 'months',
-			'd' => 'days',
-			'h' => 'hours',
-			'i' => 'minutes',
-			's' => 'seconds',
-		);
-		
-		// convert keys
-		$clean = array();
-		$diff = get_object_vars($diff);
-		foreach ($diff as $key=>$value)
-		{
-			if (in_array($key, array_keys($filter)))
-			{
-				$clean[$filter[$key]] = $value;
-			}
-		}
-		$clean['invert'] = $diff['invert'];
-		
 		// return
-		return $clean;
+		return $diff;
 	}
 	
 	public static function days_in_month($date)

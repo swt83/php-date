@@ -41,45 +41,48 @@ $date1 = Date::forge('2012-04-05');
 $date2 = Date::forge('2012-04-08');
 $diff = Date::compare($date1, $date2);
 /*
-Array
+DateInterval Object
 (
-    [years] => 0
-    [months] => 0
-    [days] => 3
-    [hours] => 0
-    [minutes] => 0
-    [seconds] => 0
+    [y] => 0
+    [m] => 0
+    [d] => 3
+    [h] => 0
+    [i] => 0
+    [s] => 0
     [invert] => 0
+    [days] => 3
 )
 */
 
 // passing timestamps
-$diff = Date::compare(1333598400, 1334462400);
+$diff = Date::compare(1333598400, 1333857600);
 /*
-Array
+DateInterval Object
 (
-    [years] => 0
-    [months] => 0
-    [days] => 3
-    [hours] => 0
-    [minutes] => 0
-    [seconds] => 0
+    [y] => 0
+    [m] => 0
+    [d] => 3
+    [h] => 0
+    [i] => 0
+    [s] => 0
     [invert] => 0
+    [days] => 3
 )
 */
 
 // passing strings
 $diff = Date::compare('April 08, 2012', 'April 05, 2012');
 /*
-Array
+DateInterval Object
 (
-    [years] => 0
-    [months] => 0
-    [days] => 3
-    [hours] => 0
-    [minutes] => 0
-    [seconds] => 0
+    [y] => 0
+    [m] => 0
+    [d] => 3
+    [h] => 0
+    [i] => 0
+    [s] => 0
     [invert] => 1
+    [days] => 3
 )
 */
 ```
