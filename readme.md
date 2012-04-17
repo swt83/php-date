@@ -28,6 +28,8 @@ $date = Date::forge('last sunday')->format('time'); // 00:00:00
 $date = Date::forge('2012-04-12')->reforge('+ 3 days')->format('date'); // 2012-04-15
 ```
 
+## Math with Dates ##
+
 Let's look at some date comparison examples:
 
 ```php
