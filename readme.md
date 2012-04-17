@@ -37,9 +37,23 @@ Let's look at some date comparison examples:
 $date1 = Date::forge('2012-04-12');
 $date2 = Date::forge('2012-04-15');
 $diff = Date::compare($date1, $date2);
-
 /*
-$diff = Array
+Array
+(
+    [years] => 0
+    [months] => 0
+    [days] => 3
+    [hours] => 0
+    [minutes] => 0
+    [seconds] => 0
+    [invert] => 0
+)
+*/
+
+// passing timestamps
+$diff = Date::compare(1334203200, 1334462400);
+/*
+Array
 (
     [years] => 0
     [months] => 0
@@ -53,9 +67,8 @@ $diff = Array
 
 // passing strings
 $diff = Date::compare('April 15, 2012', 'April 12, 2012');
-
 /*
-$diff = Array
+Array
 (
     [years] => 0
     [months] => 0
