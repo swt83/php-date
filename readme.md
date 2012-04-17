@@ -66,7 +66,7 @@ $diff = Array
 
 ## Formatting ##
 
-For help in building your formats, checkout the [PHP ``strftime()`` docs](http://php.net/manual/en/function.strftime.php).
+For help in building your formats, checkout the [PHP strftime() docs](http://php.net/manual/en/function.strftime.php).
 
 ## Notes ##
 
