@@ -19,7 +19,7 @@ $date = Date::forge('last sunday')->format('%B %d, %Y'); // April 15, 2012
 // get a predefined format
 $date = Date::forge('last sunday')->format('datetime'); // 2012-04-15 00:00:00
 $date = Date::forge('last sunday')->format('date'); // 2012-04-15
-$date = Date::forge('last sunday')->format('datetime'); // 00:00:00
+$date = Date::forge('last sunday')->format('time'); // 00:00:00
 
 // amend the timestamp value, relative to existing value
 $date = Date::forge('2012-04-12')->format('date'); // 2012-04-12
