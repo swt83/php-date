@@ -4,7 +4,7 @@ Working w/ dates can be a bear.  While this helper class probably is missing som
 
 ## Examples ##
 
-Working examples should make it pretty clear how easy this is to use:
+This is pretty simple:
 
 ```php
 // default timestamp is now
