@@ -4,38 +4,41 @@ Working w/ dates can be a bear.  While this helper class probably is missing som
 
 ## Examples ##
 
-This is pretty simple:
+Some basic examples:
 
 ```php
 // default timestamp is now
 $date = Date::forge();
 
 // pass timestamps
-$date = Date::forge(1334462400);
+$date = Date::forge(1333857600);
 
 // pass strings
 $date = Date::forge('last sunday');
 
+// get timestamp
+$date = Date::forge('last sunday')->time(); // 1333857600
+
 // get a nice format
-$date = Date::forge('last sunday')->format('%B %d, %Y'); // April 15, 2012
+$date = Date::forge('last sunday')->format('%B %d, %Y'); // April 08, 2012
 
 // get a predefined format
-$date = Date::forge('last sunday')->format('datetime'); // 2012-04-15 00:00:00
-$date = Date::forge('last sunday')->format('date'); // 2012-04-15
+$date = Date::forge('last sunday')->format('datetime'); // 2012-04-08 00:00:00
+$date = Date::forge('last sunday')->format('date'); // 2012-04-08
 $date = Date::forge('last sunday')->format('time'); // 00:00:00
 
 // amend the timestamp value, relative to existing value
-$date = Date::forge('2012-04-12')->reforge('+ 3 days')->format('date'); // 2012-04-15
+$date = Date::forge('2012-04-05')->reforge('+ 3 days')->format('date'); // 2012-04-08
 ```
 
-## Math with Dates ##
+## Math w/ Dates ##
 
 Let's look at some date comparison examples:
 
 ```php
 // passing objects
-$date1 = Date::forge('2012-04-12');
-$date2 = Date::forge('2012-04-15');
+$date1 = Date::forge('2012-04-05');
+$date2 = Date::forge('2012-04-08');
 $diff = Date::compare($date1, $date2);
 /*
 Array
@@ -51,7 +54,7 @@ Array
 */
 
 // passing timestamps
-$diff = Date::compare(1334203200, 1334462400);
+$diff = Date::compare(1333598400, 1334462400);
 /*
 Array
 (
@@ -66,7 +69,7 @@ Array
 */
 
 // passing strings
-$diff = Date::compare('April 15, 2012', 'April 12, 2012');
+$diff = Date::compare('April 08, 2012', 'April 05, 2012');
 /*
 Array
 (
