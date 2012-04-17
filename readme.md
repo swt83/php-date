@@ -10,7 +10,10 @@ Working examples should make it pretty clear how easy this is to use:
 // default timestamp is now
 $date = Date::forge();
 
-// set a custom timestamp
+// pass timestamps
+$date = Date::forge(1334462400);
+
+// pass strings
 $date = Date::forge('last sunday');
 
 // get a nice format
@@ -22,8 +25,7 @@ $date = Date::forge('last sunday')->format('date'); // 2012-04-15
 $date = Date::forge('last sunday')->format('time'); // 00:00:00
 
 // amend the timestamp value, relative to existing value
-$date = Date::forge('2012-04-12')->format('date'); // 2012-04-12
-$date->reforge('+ 3 days')->format('date'); // 2012-04-15
+$date = Date::forge('2012-04-12')->reforge('+ 3 days')->format('date'); // 2012-04-15
 ```
 
 Let's look at some date comparison examples:
