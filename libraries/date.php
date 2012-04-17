@@ -2,36 +2,20 @@
 
 class Date
 {
-	/**
-	 * Unix timestamp for object.
-	 */
 	protected $time;
 	
-	/**
-	 * Preset format strings.
-	 */
 	protected $formats = array(
 		'datetime' => '%Y-%m-%d %H:%M:%S',
 		'date' => '%Y-%m-%d',
 		'time' => '%H:%M:%S',
 	);
 	
-	/**
-	 * Static constructor.
-	 *
-	 * param	string	$str
-	 */
 	public static function forge($str = null)
 	{
 		$class = __CLASS__;
 		return new $class($str);
 	}
 	
-	/**
-	 * Constructor.
-	 *
-	 * param	string	$str
-	 */
 	public function __construct($str = null)
 	{
 		// if no given...
@@ -58,7 +42,7 @@ class Date
 				$time = strtotime($str);
 				
 				// if conversion fails...
-				if ($time === false or $time === null)
+				if (!$time)
 				{
 					// set time as false
 					$this->time = false;
@@ -72,19 +56,11 @@ class Date
 		}
 	}
 	
-	/**
-	 * Retreive the timestamp.
-	 */
 	public function time()
 	{
 		return $this->time;
 	}
 	
-	/**
-	 * Format the timestamp to something useful.
-	 *
-	 * param	string	$str
-	 */
 	public function format($str)
 	{
 		// convert alias string
@@ -106,30 +82,31 @@ class Date
 		}
 	}
 	
-	/**
-	 * Modify timestamp relative to existing.
-	 *
-	 * param	string	$str
-	 */
 	public function reforge($str)
 	{
 		// if not false...
 		if ($this->time !== false)
 		{
 			// amend the time
-			$this->time = strtotime($str, $this->time);
+			$time = strtotime($str, $this->time);
+			
+			// if conversion fails...
+			if (!$time)
+			{
+				// set time as false
+				$this->time = false;
+			}
+			else
+			{
+				// accept time value
+				$this->time = $time;
+			}
 		}
 		
 		// return
 		return $this;
 	}
 	
-	/**
-	 * Compare two date objects or timestamps.
-	 *
-	 * param	object/int	$date1
-	 * param	object/int	$date2
-	 */
 	public static function compare($date1, $date2 = null)
 	{
 		// convert to objects, all
@@ -173,9 +150,6 @@ class Date
 		return $clean;
 	}
 	
-	/**
-	 * Get number of days in month.
-	 */
 	public static function days_in_month($date)
 	{
 		// convert to object
