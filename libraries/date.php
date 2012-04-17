@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * A LaravelPHP helper class for working w/ dates.
+ *
+ * @package    Date
+ * @author     Scott Travis <scott.w.travis@gmail.com>
+ * @link       http://github.com/swt83/laravel-date
+ * @license    MIT License
+ */
+
 class Date
 {
 	protected $time;
