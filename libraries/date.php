@@ -142,7 +142,7 @@ class Date
 		$difference = round($difference);
 		
 		// determine plural
-		if($difference != 1)
+		if($difference !== 1)
 		{
 			$periods[$j].= 's';
 		}
