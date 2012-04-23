@@ -116,7 +116,7 @@ class Date
 		return $this;
 	}
 	
-	public static function compare($date1, $date2 = null)
+	public static function diff($date1, $date2 = null)
 	{
 		// convert to objects, all
 		if (!is_object($date1)) $date1 = self::forge($date1);

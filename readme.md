@@ -39,7 +39,7 @@ Let's look at some date comparison examples:
 // passing objects
 $date1 = Date::forge('2012-04-05');
 $date2 = Date::forge('2012-04-08');
-$diff = Date::compare($date1, $date2);
+$diff = Date::diff($date1, $date2);
 /*
 DateInterval Object
 (
@@ -55,7 +55,7 @@ DateInterval Object
 */
 
 // passing timestamps
-$diff = Date::compare(1333598400, 1333857600);
+$diff = Date::diff(1333598400, 1333857600);
 /*
 DateInterval Object
 (
@@ -71,7 +71,7 @@ DateInterval Object
 */
 
 // passing strings
-$diff = Date::compare('April 08, 2012', 'April 05, 2012');
+$diff = Date::diff('April 08, 2012', 'April 05, 2012');
 /*
 DateInterval Object
 (
