@@ -116,6 +116,41 @@ class Date
 		return $this;
 	}
 	
+	public function ago()
+	{
+		// set now and then
+		$now = time();
+		$time = $this->time();
+		
+		// catch error
+		if (!$time) return false;
+		
+		// build period and length arrays
+		$periods = array('second', 'minute', 'hour', 'day', 'week', 'month', 'year', 'decade');
+		$lengths = array(60, 60, 24, 7, 4.35, 12, 10);
+		
+		// get difference
+		$difference = $now - $time;
+		
+		// do math
+		for($j = 0; $difference >= $lengths[$j] && $j < count($lengths)-1; $j++)
+		{
+			$difference /= $lengths[$j];
+		}
+		
+		// round difference
+		$difference = round($difference);
+		
+		// determine plural
+		if($difference != 1)
+		{
+			$periods[$j].= 's';
+		}
+		
+		// return
+		return $difference.' '.$periods[$j].' ago';
+	}
+	
 	public static function diff($date1, $date2 = null)
 	{
 		// convert to objects, all

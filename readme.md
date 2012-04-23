@@ -29,6 +29,9 @@ $date = Date::forge('last sunday')->format('time'); // 00:00:00
 
 // amend the timestamp value, relative to existing value
 $date = Date::forge('2012-04-05')->reforge('+ 3 days')->format('date'); // 2012-04-08
+
+// get relative 'ago' format
+$date = Date::forge('now - 10 minutes')->ago() // 10 minutes ago
 ```
 
 ## Math w/ Dates ##
