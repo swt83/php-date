@@ -133,7 +133,7 @@ class Date
 		$difference = $now - $time;
 		
 		// do math
-		for($j = 0; $difference >= $lengths[$j] && $j < count($lengths)-1; $j++)
+		for($j = 0; $difference >= $lengths[$j] and $j < count($lengths)-1; $j++)
 		{
 			$difference /= $lengths[$j];
 		}
