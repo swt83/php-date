@@ -132,6 +132,9 @@ class Date
 		// get difference
 		$difference = $now - $time;
 		
+		// catch error
+		if ($difference < 0) return false;
+		
 		// do math
 		for($j = 0; $difference >= $lengths[$j] and $j < count($lengths)-1; $j++)
 		{
@@ -148,7 +151,7 @@ class Date
 		}
 		
 		// return
-		return $difference.' '.$periods[$j].' ago';
+		return number_format($difference).' '.$periods[$j].' ago';
 	}
 	
 	public static function diff($date1, $date2 = null)
