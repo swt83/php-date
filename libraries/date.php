@@ -133,7 +133,7 @@ class Date
 		$difference = $now - $time;
 		
 		// catch error
-		if ($difference < 0) return false;
+		if ($difference < 0) $difference = 0;
 		
 		// do math
 		for($j = 0; $difference >= $lengths[$j] and $j < count($lengths)-1; $j++)
