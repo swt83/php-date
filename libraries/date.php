@@ -147,7 +147,7 @@ class Date
 		// determine plural
 		if($difference !== 1)
 		{
-			$periods[$j].= 's';
+			$periods[$j] .= 's';
 		}
 		
 		// return
