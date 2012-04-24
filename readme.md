@@ -4,7 +4,7 @@ Working w/ dates can be a bear.  While this helper class probably is missing som
 
 ## Install ##
 
-In ``applications/bundles.php`` add:
+In ``application/bundles.php`` add:
 
 ```php
 'date' => array('auto' => true),
