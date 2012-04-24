@@ -2,6 +2,14 @@
 
 Working w/ dates can be a bear.  While this helper class probably is missing some things, I find it helpful.
 
+## Install ##
+
+In ``applications/bundles.php`` add:
+
+```php
+'date' => array('auto' => true),
+```
+
 ## Examples ##
 
 Some basic examples:
