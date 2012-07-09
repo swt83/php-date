@@ -132,8 +132,12 @@ class Date
 		// get difference
 		$difference = $now - $time;
 		
-		// catch error
-		if ($difference < 0) $difference = 0;
+		// set descriptor
+		if ($difference < 0)
+		{
+			$difference = abs($difference); // absolute value
+			$negative = true;
+		}
 		
 		// do math
 		for($j = 0; $difference >= $lengths[$j] and $j < count($lengths)-1; $j++)
@@ -142,7 +146,7 @@ class Date
 		}
 		
 		// round difference
-		$difference = round($difference);
+		$difference = intval(round($difference));
 		
 		// determine plural
 		if($difference !== 1)
@@ -151,7 +155,12 @@ class Date
 		}
 		
 		// return
-		return number_format($difference).' '.$periods[$j].' ago';
+		return number_format($difference).' '.$periods[$j].' '.(isset($negative) ? '' : 'ago');
+	}
+	
+	public function until()
+	{
+		return $this->ago();
 	}
 	
 	public static function diff($date1, $date2 = null)
