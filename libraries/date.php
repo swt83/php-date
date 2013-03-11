@@ -64,12 +64,69 @@ class Date
 			}
 		}
 	}
-	
+
+        // workaround for %V format on win32 platforms    
+        // source from http://www.php.net/manual/en/function.strftime.php
+        private function week_isonumber ($time) {
+        // When strftime("%V") fails, some unoptimized workaround
+        //
+        // http://en.wikipedia.org/wiki/ISO_8601 : week 1 is "the week with the year's first Thursday in it (the formal ISO definition)"
+
+            $year = strftime("%Y", $time);
+
+            $first_day = strftime("%w", mktime(0, 0, 0, 1, 1, $year));
+            $last_day = strftime("%w", mktime(0, 0, 0, 12, 31, $year));
+
+            $number = $isonumber = strftime("%W", $time);
+
+            // According to strftime("%W"), 1st of january is in week 1 if and only if it is a monday
+            if ($first_day == 1)
+                $isonumber--;
+
+            // 1st of january is between monday and thursday; starting (now) at 0 when it should be 1
+            if ($first_day >= 1 && $first_day <= 4)
+                $isonumber++;
+            else if ($number == 0)
+                $isonumber = week_isonumber(mktime(0, 0, 0, 12, 31, $year - 1));
+
+            if ($isonumber == 53 && ($last_day == 1 || $last_day == 2 || $last_day == 3))
+                $isonumber = 1;
+
+            return sprintf("%02d", $isonumber);
+        } 
+        
+        // workaround for some formats on win32 platforms
+        // source from http://www.php.net/manual/en/function.strftime.php
+        private function strftime_win32($format, $ts = null) {
+            if (!$ts) $ts = time();
+
+            $mapping = array(
+                '%C' => sprintf("%02d", date("Y", $ts) / 100),
+                '%D' => '%m/%d/%y',
+                '%e' => sprintf("%' 2d", date("j", $ts)),
+                '%h' => '%b',
+                '%n' => "\n",
+                '%r' => date("h:i:s", $ts) . " %p",
+                '%R' => date("H:i", $ts),
+                '%t' => "\t",
+                '%T' => '%H:%M:%S',
+                '%u' => ($w = date("w", $ts)) ? $w : 7,
+                '%V' => $this->week_isonumber ($ts)
+            );
+            $format = str_replace(
+                array_keys($mapping),
+                array_values($mapping),
+                $format
+            );
+
+            return strftime($format, $ts);
+        }	
+        
 	public function time()
 	{
 		return $this->time;
 	}
-	
+        
 	public function format($str)
 	{
 		// convert alias string
@@ -81,8 +138,13 @@ class Date
 		// if valid unix timestamp...
 		if ($this->time !== false)
 		{
+                    if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+			// return formatted value on win32 platforms
+			return $this->strftime_win32($str, $this->time);
+                    } else {
 			// return formatted value
 			return strftime($str, $this->time);
+                    }                    
 		}
 		else
 		{
