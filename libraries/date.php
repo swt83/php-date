@@ -126,7 +126,7 @@ class Date
 		if (!$time) return false;
 		
 		// build period and length arrays
-		$periods = array('second', 'minute', 'hour', 'day', 'week', 'month', 'year', 'decade');
+		$periods = array(__('date::date.second'), __('date::date.minute'), __('date::date.hour'), __('date::date.day'), __('date::date.week'), __('date::date.month'), __('date::date.year'), __('date::date.decade'));
 		$lengths = array(60, 60, 24, 7, 4.35, 12, 10);
 		
 		// get difference
@@ -155,7 +155,7 @@ class Date
 		}
 		
 		// return
-		return number_format($difference).' '.$periods[$j].' '.(isset($negative) ? '' : 'ago');
+		return number_format($difference).' '.$periods[$j].' '.(isset($negative) ? '' : __('date::date.ago'));
 	}
 	
 	public function until()
