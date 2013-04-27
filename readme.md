@@ -104,4 +104,5 @@ For help in building your formats, checkout the [PHP strftime() docs](http://php
 
 ## Notes ##
 
-The class relies on ``strtotime()`` to make sense of your strings, and ``strftime()`` to make the format changes.  Just always check the ``time()`` output to see if you get false timestamps... which means the class couldn't understand what you were telling it.
+* The class relies on ``strtotime()`` to make sense of your strings, and ``strftime()`` to make the format changes.  Just always check the ``$date->time()`` output to see if you get false timestamps... which means the class couldn't understand what you were telling it.
+* This class previously would not work on Windows machines.  With the help of some contributors, I believe this now works properly on both WIN and UNIX machines.
