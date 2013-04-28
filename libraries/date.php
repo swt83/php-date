@@ -291,6 +291,7 @@ class Date
             '%T' => '%H:%M:%S',
             '%u' => ($w = date('w', $time)) ? $w : 7,
             '%V' => static::win32_v($time)
+            '%F' => '%Y-%m-%d',
         );
 
         // replace
