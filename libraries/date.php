@@ -59,8 +59,13 @@ class Date
         // if given...
         else
         {
+            // if DateTime instance
+            if ($str instanceof DateTime ) {
+                // get timestamp
+                $this->time = $str->getTimestamp();
+
             // if number...
-            if (is_numeric($str))
+            } else if (is_numeric($str))
             {
                 // treat as unix time
                 $this->time = $str;
@@ -233,8 +238,8 @@ class Date
     public static function diff($date1, $date2 = null)
     {
         // convert to objects, all
-        if (!is_object($date1)) $date1 = self::forge($date1);
-        if (!is_object($date2)) $date2 = self::forge($date2);
+        if (!($date1 instanceof Date)) $date1 = self::forge($date1);
+        if (!($date2 instanceof Date)) $date2 = self::forge($date2);
         
         // catch error
         if (!$date1->time() or !$date2->time()) return false;
@@ -260,7 +265,7 @@ class Date
     public static function days_in_month($date)
     {
         // convert to object
-        if (!is_object($date)) $date = self::forge($date);
+        if (!($date instanceof Date)) $date = self::forge($date);
     
         // return
         return cal_days_in_month(CAL_GREGORIAN, $date->format('%m'), $date->format('%Y'));
