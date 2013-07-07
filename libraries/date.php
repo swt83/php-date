@@ -143,27 +143,30 @@ class Date
      */
     public function reforge($str)
     {
+        // clone
+        $new = clone $this;
+        
         // if not false...
-        if ($this->time !== false)
+        if ($new->time !== false)
         {
             // amend the time
-            $time = strtotime($str, $this->time);
+            $time = strtotime($str, $new->time);
             
             // if conversion fails...
             if (!$time)
             {
                 // set time as false
-                $this->time = false;
+                $new->time = false;
             }
             else
             {
                 // accept time value
-                $this->time = $time;
+                $new->time = $time;
             }
         }
         
         // return
-        return $this;
+        return $new;
     }
     
     /**
