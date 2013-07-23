@@ -19,17 +19,6 @@ class Date
     protected $time;
     
     /**
-     * Pre-written formats.
-     *
-     * @var     array
-     */
-    protected $formats = array(
-        'datetime' => '%Y-%m-%d %H:%M:%S',
-        'date' => '%Y-%m-%d',
-        'time' => '%H:%M:%S',
-    );
-    
-    /**
      * Forge the date object.
      *
      * @param   string  $str
@@ -105,12 +94,6 @@ class Date
      */
     public function format($str)
     {
-        // convert alias string
-        if (in_array($str, array_keys($this->formats)))
-        {
-            $str = $this->formats[$str];
-        }
-    
         // if valid unix timestamp...
         if ($this->time !== false)
         {
@@ -143,30 +126,27 @@ class Date
      */
     public function reforge($str)
     {
-        // clone
-        $new = clone $this;
-        
         // if not false...
-        if ($new->time !== false)
+        if ($this->time !== false)
         {
             // amend the time
-            $time = strtotime($str, $new->time);
+            $time = strtotime($str, $this->time);
             
             // if conversion fails...
             if (!$time)
             {
                 // set time as false
-                $new->time = false;
+                $this->time = false;
             }
             else
             {
                 // accept time value
-                $new->time = $time;
+                $this->time = $time;
             }
         }
         
         // return
-        return $new;
+        return $this;
     }
     
     /**
@@ -270,6 +250,52 @@ class Date
     }
 
     /**
+     * Return HTML of a drawn calendar for month.
+     *
+     * @param   int         $month
+     * @param   int         $year
+     * @param   function    $closure
+     * @return  string
+     */
+    public static function draw_calendar($month, $year, $closure = null)
+    {
+        // check for errors
+        if (!is_numeric($month) or !is_numeric($year))
+        {
+            trigger_error('Invalid params for calendar method.');
+        }
+        
+        // set today
+        $today = static::forge();
+
+        // set start and stop dates
+        $start = static::forge($year.'-'.$month.'-01');
+        $days_in_month = static::days_in_month($start);
+        if ($start->format('%A') != 'Sunday') $start->reforge('previous sunday');
+        $stop = static::forge($year.'-'.$month.'-'.$days_in_month);
+        if ($stop->format('%A') != 'Saturday') $stop->reforge('next saturday');
+
+        // build map
+        $map = array();
+        while ($start->time() <= $stop->time())
+        {
+            // add date to map
+            $map[] = array(
+                'date' => clone $start,
+                'is_today' => $start->format('%F') == $today->format('%F') ? true : false,
+                'is_disabled' => $start->format('%m') == $month ? false : true,
+                'data' => $closure,
+            );
+
+            // increment
+            $start->reforge('+1 day');
+        }
+        
+        // return
+        return View::make('date::calendar')->with('map', $map);
+    }
+
+    /**
      * Fix the strftime() function to work on win32 systems [CREDIT: mcpan68].
      *
      * @param   string  $format
@@ -280,6 +306,11 @@ class Date
     {
         // time
         if (!$time) $time = time();
+
+        // This map is a work in progress.  It's a set of shortcuts to
+        // get formats to work properly in Windows.  These are just the
+        // cases that I've encountered.  Please contribute new shortcuts
+        // as they work for you.
 
         // map
         $map = array(

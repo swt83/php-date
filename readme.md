@@ -30,13 +30,8 @@ $date = Date::forge('last sunday')->time(); // 1333857600
 // get a nice format
 $date = Date::forge('last sunday')->format('%B %d, %Y'); // April 08, 2012
 
-// get a predefined format
-$date = Date::forge('last sunday')->format('datetime'); // 2012-04-08 00:00:00
-$date = Date::forge('last sunday')->format('date'); // 2012-04-08
-$date = Date::forge('last sunday')->format('time'); // 00:00:00
-
 // amend the timestamp value, relative to existing value
-$date = Date::forge('2012-04-05')->reforge('+ 3 days')->format('date'); // 2012-04-08
+$date = Date::forge('2012-04-05')->reforge('+ 3 days')->format('%F'); // 2012-04-08
 
 // get relative 'ago' format
 $date = Date::forge('now - 10 minutes')->ago() // 10 minutes ago
@@ -98,11 +93,27 @@ DateInterval Object
 */
 ```
 
-## Formatting ##
+## Drawing Calendars ##
 
-For help in building your formats, checkout the [PHP strftime() docs](http://php.net/manual/en/function.strftime.php).
+You can print a nice HTML table of a calendar:
+
+```php
+$html = Date::draw_calendar($month, $year); // both params should be integers
+```
+
+You can print custom content inside the cells for a specific date by passing a closure:
+
+```php
+$html = Date::draw_calendar($month, $year, function($date) use ($my_custom_param) {
+    if ($date->format('%F') == $my_custom_param)
+    {
+        echo 'something special';
+    }
+});
+```
+
+Take a look at the view used in the package and you'll see what CSS options are available.
 
 ## Notes ##
 
-* The class relies on ``strtotime()`` to make sense of your strings, and ``strftime()`` to make the format changes.  Just always check the ``$date->time()`` output to see if you get false timestamps... which means the class couldn't understand what you were telling it.
-* This class previously would not work on Windows machines.  With the help of some contributors, I believe this now works properly on both WIN and UNIX machines.
+For help in building your formats, checkout the [PHP strftime() docs](http://php.net/manual/en/function.strftime.php).
