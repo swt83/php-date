@@ -39,7 +39,7 @@ class Date
     public function __construct($str = null)
     {
         // if no given...
-        if ($str === null)
+        if ($str == null)
         {
             // use now
             $this->time = time();
@@ -98,7 +98,7 @@ class Date
         if ($this->time !== false)
         {
             // if on windows...
-            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
+            if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN')
             {
                 // return win32 formatted value
                 return static::win32_strftime($str, $this->time);
@@ -228,7 +228,7 @@ class Date
         $diff = date_diff($date1, $date2);
         
         // catch error
-        if ($diff === false) return false;
+        if ($diff == false) return false;
         
         // return
         return $diff;
