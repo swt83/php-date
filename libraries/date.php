@@ -9,8 +9,8 @@
  * @license    MIT License
  */
 
-class Date
-{
+class Date {
+    
     /**
      * Object timestamp.
      *
@@ -95,7 +95,7 @@ class Date
     public function format($str)
     {
         // if valid unix timestamp...
-        if ($this->time !== false)
+        if ($this->time !== false and $this->time > 0)
         {
             // if on windows...
             if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN')
