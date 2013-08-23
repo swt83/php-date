@@ -216,15 +216,15 @@ class Date
     public static function diff($date1, $date2 = null)
     {
         // convert to objects, all
-        if (!is_object($date1)) $date1 = self::forge($date1);
-        if (!is_object($date2)) $date2 = self::forge($date2);
+        if (!is_object($date1)) $date1 = static::forge($date1);
+        if (!is_object($date2)) $date2 = static::forge($date2);
         
         // catch error
         if (!$date1->time() or !$date2->time()) return false;
         
         // perform comparison
-        $date1 = date_create($date1->format('datetime'));
-        $date2 = date_create($date2->format('datetime'));
+        $date1 = date_create($date1->format('%F %X'));
+        $date2 = date_create($date2->format('%F %X'));
         $diff = date_diff($date1, $date2);
         
         // catch error
@@ -243,7 +243,7 @@ class Date
     public static function days_in_month($date)
     {
         // convert to object
-        if (!is_object($date)) $date = self::forge($date);
+        if (!is_object($date)) $date = static::forge($date);
     
         // return
         return cal_days_in_month(CAL_GREGORIAN, $date->format('%m'), $date->format('%Y'));
