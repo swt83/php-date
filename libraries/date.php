@@ -95,7 +95,7 @@ class Date {
     public function format($str)
     {
         // if valid unix timestamp...
-        if ($this->time !== false and $this->time > 0)
+        if ($this->time !== false)
         {
             // if on windows...
             if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN')
