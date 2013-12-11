@@ -1,6 +1,8 @@
 # Date
 
-A PHP package for working w/ dates.  When used in Laravel PHP, includes support for language files and calendar views.
+A PHP library for working w/ dates.
+
+Includes support for language files and calendar views when used in Laravel PHP.
 
 ## Install
 
@@ -10,7 +12,7 @@ Register your service provider in ``app/config/app.php``:
 'Travis\Date\Provider'
 ```
 
-You may also wish to an an alias to remove the namespace:
+You may also wish to add an alias to remove the namespace:
 
 ```php
 'Date' => 'Travis\Date'
