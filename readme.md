@@ -2,9 +2,11 @@
 
 A PHP library for working w/ dates.
 
-Includes support for language files and calendar views when used in Laravel PHP.
-
 ## Install
+
+Some methods are designed for use in Laravel.
+
+### Provider
 
 Register your service provider in ``app/config/app.php``:
 
