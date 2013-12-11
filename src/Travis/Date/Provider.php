@@ -4,8 +4,8 @@ namespace Travis\Date;
 
 use Illuminate\Support\ServiceProvider;
 
-class Provider extends ServiceProvider
-{
+class Provider extends ServiceProvider {
+
     /**
      * Indicates if loading of the provider is deferred.
      *
