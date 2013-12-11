@@ -1,5 +1,5 @@
 <?php
 
 Autoloader::map(array(
-	'Date' => __DIR__.'/libraries/date.php',
+    'Date' => __DIR__.'/src/Travis/Date.php',
 ));

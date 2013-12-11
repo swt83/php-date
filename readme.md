@@ -1,16 +1,22 @@
-# Date for LaravelPHP #
+# Date
 
-Working w/ dates can be a bear.  While this helper class probably is missing some things, I find it helpful.
+A PHP package for working w/ dates.  When used in Laravel PHP, includes support for language files and calendar views.
 
-## Install ##
+## Install
 
-In ``application/bundles.php`` add:
+Register your service provider in ``app/config/app.php``:
 
 ```php
-'date' => array('auto' => true),
+'Travis\Date\Provider'
 ```
 
-## Examples ##
+You may also wish to an an alias to remove the namespace:
+
+```php
+'Date' => 'Travis\Date'
+```
+
+## Examples
 
 Some basic examples:
 
@@ -37,7 +43,7 @@ $date = Date::forge('2012-04-05')->reforge('+ 3 days')->format('%F'); // 2012-04
 $date = Date::forge('now - 10 minutes')->ago() // 10 minutes ago
 ```
 
-## Math w/ Dates ##
+## Math w/ Dates
 
 Let's look at some date comparison examples:
 
@@ -93,7 +99,7 @@ DateInterval Object
 */
 ```
 
-## Drawing Calendars ##
+## Drawing Calendars
 
 You can print a nice HTML table of a calendar:
 
@@ -114,6 +120,6 @@ $html = Date::draw_calendar($month, $year, function($date) use ($my_custom_param
 
 Take a look at the view used in the package and you'll see what CSS options are available.
 
-## Notes ##
+## Notes
 
 For help in building your formats, checkout the [PHP strftime() docs](http://php.net/manual/en/function.strftime.php).
