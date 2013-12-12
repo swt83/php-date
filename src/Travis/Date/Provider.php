@@ -20,7 +20,7 @@ class Provider extends ServiceProvider {
      */
     public function boot()
     {
-        $this->package('swt83/date', 'travis/date');
+        $this->package('travis/date');
     }
 
     /**
