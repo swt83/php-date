@@ -1,23 +1,17 @@
 # Date
 
-A PHP library for working w/ dates.
+A Laravel PHP library for working w/ dates.
 
 ## Install
 
-Some methods are designed for use in Laravel.
+Normal install via Composer.
 
 ### Provider
 
-Register your service provider in ``app/config/app.php``:
+Register the service provider in your ``app/config/app.php`` file:
 
 ```php
-'Travis\Date\Provider'
-```
-
-You may also wish to add an alias to remove the namespace:
-
-```php
-'Date' => 'Travis\Date'
+'Travis\Date\Provider',
 ```
 
 ## Examples
