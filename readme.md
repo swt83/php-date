@@ -2,7 +2,7 @@
 
 A PHP library for working w/ dates.
 
-The ``ago()`` method requires Laravel, while all other methods use native PHP.
+The ``ago()`` and ``draw_calendar()`` methods require Laravel, while all other methods use native PHP.
 
 ## Install
 
