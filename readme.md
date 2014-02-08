@@ -1,6 +1,8 @@
 # Date
 
-A Laravel PHP library for working w/ dates.
+A PHP library for working w/ dates.
+
+The ``ago()`` method requires Laravel, while all other methods use native PHP.
 
 ## Install
 
@@ -11,7 +13,7 @@ Normal install via Composer.
 Register the service provider in your ``app/config/app.php`` file:
 
 ```php
-'Travis\Date\Provider',
+'Travis\Date\Provider'
 ```
 
 ## Examples
@@ -20,25 +22,25 @@ Some basic examples:
 
 ```php
 // default timestamp is now
-$date = Date::forge();
+$date = Travis\Date::forge();
 
 // pass timestamps
-$date = Date::forge(1333857600);
+$date = Travis\Date::forge(1333857600);
 
 // pass strings
-$date = Date::forge('last sunday');
+$date = Travis\Date::forge('last sunday');
 
 // get timestamp
-$date = Date::forge('last sunday')->time(); // 1333857600
+$date = Travis\Date::forge('last sunday')->time(); // 1333857600
 
 // get a nice format
-$date = Date::forge('last sunday')->format('%B %d, %Y'); // April 08, 2012
+$date = Travis\Date::forge('last sunday')->format('%B %d, %Y'); // April 08, 2012
 
 // amend the timestamp value, relative to existing value
-$date = Date::forge('2012-04-05')->reforge('+ 3 days')->format('%F'); // 2012-04-08
+$date = Travis\Date::forge('2012-04-05')->reforge('+ 3 days')->format('%F'); // 2012-04-08
 
 // get relative 'ago' format
-$date = Date::forge('now - 10 minutes')->ago() // 10 minutes ago
+$date = Travis\Date::forge('now - 10 minutes')->ago() // 10 minutes ago
 ```
 
 ## Math w/ Dates
@@ -47,9 +49,9 @@ Let's look at some date comparison examples:
 
 ```php
 // passing objects
-$date1 = Date::forge('2012-04-05');
-$date2 = Date::forge('2012-04-08');
-$diff = Date::diff($date1, $date2);
+$date1 = Travis\Date::forge('2012-04-05');
+$date2 = Travis\Date::forge('2012-04-08');
+$diff = Travis\Date::diff($date1, $date2);
 /*
 DateInterval Object
 (
@@ -65,7 +67,7 @@ DateInterval Object
 */
 
 // passing timestamps
-$diff = Date::diff(1333598400, 1333857600);
+$diff = Travis\Date::diff(1333598400, 1333857600);
 /*
 DateInterval Object
 (
@@ -81,7 +83,7 @@ DateInterval Object
 */
 
 // passing strings
-$diff = Date::diff('April 08, 2012', 'April 05, 2012');
+$diff = Travis\Date::diff('April 08, 2012', 'April 05, 2012');
 /*
 DateInterval Object
 (
@@ -102,13 +104,13 @@ DateInterval Object
 You can print a nice HTML table of a calendar:
 
 ```php
-$html = Date::draw_calendar($month, $year); // both params should be integers
+$html = Travis\Date::draw_calendar($month, $year); // both params should be integers
 ```
 
 You can print custom content inside the cells for a specific date by passing a closure:
 
 ```php
-$html = Date::draw_calendar($month, $year, function($date) use ($my_custom_param) {
+$html = Travis\Date::draw_calendar($month, $year, function($date) use ($my_custom_param) {
     if ($date->format('%F') == $my_custom_param)
     {
         echo 'something special';
