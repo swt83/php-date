@@ -1,7 +1,7 @@
 {
     "name": "travis/date",
     "description": "A Laravel PHP library for working w/ dates.",
-    "homepage": "https://github.com/swt83/php-laravel-date",
+    "homepage": "https://github.com/swt83/php-date",
     "license": "MIT",
     "authors": [
         {
@@ -15,7 +15,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Travis\\": "src/"
+            "Travis\\": "src/models/"
         }
     },
     "minimum-stability": "dev"
