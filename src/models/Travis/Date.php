@@ -285,7 +285,7 @@ class Date {
         }
 
         // return
-        return \View::make('travis/date::calendar')->with('map', $map);
+        return \View::make('date::calendar')->with('map', $map);
     }
 
     /**
