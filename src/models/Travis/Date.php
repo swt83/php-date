@@ -42,7 +42,7 @@ class Date {
         else
         {
             // if object...
-            if (is_a($str, 'Travis\\Date'))
+            if ($str instanceof \Travis\Date)
             {
                 $this->time = $str->time();
             }
@@ -121,31 +121,38 @@ class Date {
      * Reforge the current date object.
      *
      * @param   string  $str
+     * @param   boolean $is_new
      * @return  object
      */
-    public function reforge($str)
+    public function reforge($str, $is_new = false)
     {
+        // if new...
+        if ($is_new) $date = clone $date;
+
+        // else if NOT new...
+        else $date = $this;
+
         // if not false...
-        if ($this->time !== false)
+        if ($date->time !== false)
         {
             // amend the time
-            $time = strtotime($str, $this->time);
+            $time = strtotime($str, $date->time);
 
             // if conversion fails...
             if (!$time)
             {
                 // set time as false
-                $this->time = false;
+                $date->time = false;
             }
             else
             {
                 // accept time value
-                $this->time = $time;
+                $date->time = $time;
             }
         }
 
         // return
-        return $this;
+        return $date;
     }
 
     /**
@@ -215,8 +222,8 @@ class Date {
     public static function diff($date1, $date2 = null)
     {
         // convert to objects, all
-        if (!is_a($date1, 'Travis\\Date')) $date1 = static::forge($date1);
-        if (!is_a($date2, 'Travis\\Date')) $date2 = static::forge($date2);
+        if (!$date1 instanceof \Travis\Date) $date1 = static::forge($date1);
+        if (!$date2 instanceof \Travis\Date) $date2 = static::forge($date2);
 
         // catch error
         if (!$date1->time() or !$date2->time()) return false;
@@ -242,7 +249,7 @@ class Date {
     public static function days_in_month($date)
     {
         // convert to object
-        if (!is_a($date, 'Travis\\Date')) $date = static::forge($date);
+        if (!$date instanceof \Travis\Date) $date = static::forge($date);
 
         // return
         return cal_days_in_month(CAL_GREGORIAN, $date->format('%m'), $date->format('%Y'));
