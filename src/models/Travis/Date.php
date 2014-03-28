@@ -42,7 +42,7 @@ class Date {
         else
         {
             // if object...
-            if ($str instanceof \Travis\Date)
+            if ($str instanceof Date)
             {
                 $this->time = $str->time();
             }
@@ -236,8 +236,8 @@ class Date {
     public static function diff($date1, $date2 = null)
     {
         // convert to objects, all
-        if (!$date1 instanceof \Travis\Date) $date1 = static::forge($date1);
-        if (!$date2 instanceof \Travis\Date) $date2 = static::forge($date2);
+        if (!$date1 instanceof Date) $date1 = static::forge($date1);
+        if (!$date2 instanceof Date) $date2 = static::forge($date2);
 
         // catch error
         if (!$date1->time() or !$date2->time()) return false;
@@ -263,7 +263,7 @@ class Date {
     public static function days_in_month($date)
     {
         // convert to object
-        if (!$date instanceof \Travis\Date) $date = static::forge($date);
+        if (!$date instanceof Date) $date = static::forge($date);
 
         // return
         return cal_days_in_month(CAL_GREGORIAN, $date->format('%m'), $date->format('%Y'));
