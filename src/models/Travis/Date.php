@@ -42,34 +42,48 @@ class Date {
         else
         {
             // if object...
-            if ($str instanceof Date)
+            if (is_object($str) or is_array($str))
             {
-                $this->time = $str->time();
-            }
-
-            // else if number...
-            elseif (is_numeric($str))
-            {
-                // treat as unix time
-                $this->time = $str;
-            }
-
-            // finally...
-            else
-            {
-                // treat as string
-                $time = strtotime($str);
-
-                // if conversion fails...
-                if (!$time)
+                // if date object...
+                if (static::is_object($str))
                 {
-                    // set time as false
-                    $this->time = false;
+                    $this->time = $str->time();
                 }
+
+                // else...
                 else
                 {
-                    // accept time value
-                    $this->time = $time;
+                    $this->time = false;
+                }
+            }
+
+            // else...
+            else
+            {
+                // else if number...
+                if (is_numeric($str))
+                {
+                    // treat as unix time
+                    $this->time = $str;
+                }
+
+                // finally...
+                else
+                {
+                    // treat as string
+                    $time = strtotime($str);
+
+                    // if conversion fails...
+                    if (!$time)
+                    {
+                        // set time as false
+                        $this->time = false;
+                    }
+                    else
+                    {
+                        // accept time value
+                        $this->time = $time;
+                    }
                 }
             }
         }
@@ -236,8 +250,8 @@ class Date {
     public static function diff($date1, $date2 = null)
     {
         // convert to objects, all
-        if (!$date1 instanceof Date) $date1 = static::forge($date1);
-        if (!$date2 instanceof Date) $date2 = static::forge($date2);
+        if (!static::is_object($date1)) $date1 = static::forge($date1);
+        if (!static::is_object($date2)) $date2 = static::forge($date2);
 
         // catch error
         if (!$date1->time() or !$date2->time()) return false;
@@ -263,7 +277,7 @@ class Date {
     public static function days_in_month($date)
     {
         // convert to object
-        if (!$date instanceof Date) $date = static::forge($date);
+        if (!static::is_object($date)) $date = static::forge($date);
 
         // return
         return cal_days_in_month(CAL_GREGORIAN, $date->format('%m'), $date->format('%Y'));
@@ -391,6 +405,18 @@ class Date {
 
         // return
         return sprintf('%02d', $isonumber);
+    }
+
+    protected static function is_object($object)
+    {
+        if (!is_object($object))
+        {
+            return false;
+        }
+
+        $class = get_class($object);
+
+        return $class === __CLASS__;
     }
 
 }
