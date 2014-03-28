@@ -32,7 +32,7 @@ class Date {
     public function __construct($str = null)
     {
         // if no given...
-        if ($str == null)
+        if ($str === null)
         {
             // use now
             $this->time = time();
@@ -41,14 +41,20 @@ class Date {
         // if given...
         else
         {
-            // if number...
-            if (is_numeric($str))
+            // if object...
+            if (is_a($str, 'Travis\\Date'))
+            {
+                $this->time = $str->time();
+            }
+
+            // else if number...
+            elseif (is_numeric($str))
             {
                 // treat as unix time
                 $this->time = $str;
             }
 
-            // if NOT number...
+            // finally...
             else
             {
                 // treat as string
@@ -91,7 +97,7 @@ class Date {
         if ($this->time !== false)
         {
             // if on windows...
-            if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN')
+            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
             {
                 // return win32 formatted value
                 return static::win32_strftime($str, $this->time);
@@ -209,8 +215,8 @@ class Date {
     public static function diff($date1, $date2 = null)
     {
         // convert to objects, all
-        if (!is_object($date1)) $date1 = static::forge($date1);
-        if (!is_object($date2)) $date2 = static::forge($date2);
+        if (!is_a($date1, 'Travis\\Date')) $date1 = static::forge($date1);
+        if (!is_a($date2, 'Travis\\Date')) $date2 = static::forge($date2);
 
         // catch error
         if (!$date1->time() or !$date2->time()) return false;
@@ -221,7 +227,7 @@ class Date {
         $diff = date_diff($date1, $date2);
 
         // catch error
-        if ($diff == false) return false;
+        if ($diff === false) return false;
 
         // return
         return $diff;
@@ -236,7 +242,7 @@ class Date {
     public static function days_in_month($date)
     {
         // convert to object
-        if (!is_object($date)) $date = static::forge($date);
+        if (!is_a($date, 'Travis\\Date')) $date = static::forge($date);
 
         // return
         return cal_days_in_month(CAL_GREGORIAN, $date->format('%m'), $date->format('%Y'));
@@ -275,8 +281,8 @@ class Date {
             // add date to map
             $map[] = array(
                 'date' => clone $start,
-                'is_today' => $start->format('%F') == $today->format('%F') ? true : false,
-                'is_disabled' => $start->format('%m') == $month ? false : true,
+                'is_today' => $start->format('%F') === $today->format('%F') ? true : false,
+                'is_disabled' => $start->format('%m') === $month ? false : true,
                 'data' => $closure,
             );
 
@@ -343,7 +349,7 @@ class Date {
 
         $number = $isonumber = strftime('%W', $time);
 
-        if ($first_day == 1)
+        if ($first_day === 1)
         {
             $isonumber--;
         }
@@ -352,12 +358,12 @@ class Date {
         {
             $isonumber++;
         }
-        elseif ($number == 0)
+        elseif ($number === 0)
         {
             $isonumber = win32_v(mktime(0, 0, 0, 12, 31, $year - 1));
         }
 
-        if ($isonumber == 53 and ($last_day == 1 or $last_day == 2 or $last_day == 3))
+        if ($isonumber === 53 and ($last_day === 1 or $last_day === 2 or $last_day === 3))
         {
             $isonumber = 1;
         }
