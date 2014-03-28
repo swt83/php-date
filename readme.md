@@ -45,7 +45,7 @@ $date = Travis\Date::forge('2012-04-05')->reforge('+ 3 days')->format('%F'); // 
 
 // amend the timestamp value, and keep original date object
 $date = Travis\Date::forge('2012-04-05');
-$new_date = $date->reforge('+3 days', true);
+$new_date = $date->reforge('+3 days', true); // flag to return modified cloned object
 echo $date->format('%F'); // 2013-04-05
 echo $new_date->format('%F'); // 2014-04-08
 
