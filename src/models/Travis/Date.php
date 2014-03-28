@@ -407,6 +407,12 @@ class Date {
         return sprintf('%02d', $isonumber);
     }
 
+    /**
+     * Return object detection.
+     *
+     * @param   object  $object
+     * @return  boolean
+     */
     protected static function is_object($object)
     {
         if (!is_object($object))
