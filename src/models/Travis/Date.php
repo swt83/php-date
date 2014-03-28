@@ -126,33 +126,47 @@ class Date {
      */
     public function reforge($str, $is_new = false)
     {
-        // if new...
-        if ($is_new) $date = clone $date;
-
-        // else if NOT new...
-        else $date = $this;
-
         // if not false...
-        if ($date->time !== false)
+        if ($this->time !== false)
         {
             // amend the time
-            $time = strtotime($str, $date->time);
+            $time = strtotime($str, $this->time);
 
             // if conversion fails...
             if (!$time)
             {
                 // set time as false
-                $date->time = false;
+                $new_time = false;
             }
             else
             {
                 // accept time value
-                $date->time = $time;
+                $new_time = $time;
             }
         }
 
+        // if is new...
+        if ($is_new)
+        {
+            // clone
+            $new = clone $this;
+
+            // set new time
+            $new->time = $new_time;
+
+            // return
+            return $new;
+        }
+
+        // else if NOT new...
+        else
+        {
+            // set new time
+            $this->time = $new_time;
+        }
+
         // return
-        return $date;
+        return $this;
     }
 
     /**

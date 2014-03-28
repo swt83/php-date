@@ -30,6 +30,10 @@ $date = Travis\Date::forge(1333857600);
 // pass strings
 $date = Travis\Date::forge('last sunday');
 
+// pass objects
+$date = Travis\Date::forge('last sunday');
+$new_date = Travis\Date::forge($date);
+
 // get timestamp
 $date = Travis\Date::forge('last sunday')->time(); // 1333857600
 
@@ -38,6 +42,12 @@ $date = Travis\Date::forge('last sunday')->format('%B %d, %Y'); // April 08, 201
 
 // amend the timestamp value, relative to existing value
 $date = Travis\Date::forge('2012-04-05')->reforge('+ 3 days')->format('%F'); // 2012-04-08
+
+// amend the timestamp value, and keep original date object
+$date = Travis\Date::forge('2012-04-05');
+$new_date = $date->reforge('+3 days');
+echo $date->format('%F'); // 2013-04-05
+echo $new_date->format('%F'); // 2014-04-08
 
 // get relative 'ago' format
 $date = Travis\Date::forge('now - 10 minutes')->ago() // 10 minutes ago
