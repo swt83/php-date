@@ -41,27 +41,17 @@ class Date {
         // if given...
         else
         {
-            // if object...
-            if (is_object($str) or is_array($str))
+            // if date object...
+            if (static::is_object($str))
             {
-                // if date object...
-                if (static::is_object($str))
-                {
-                    $this->time = $str->time();
-                }
-
-                // else...
-                else
-                {
-                    $this->time = false;
-                }
+                $this->time = $str->time();
             }
 
             // else...
             else
             {
                 // else if number...
-                if (is_numeric($str))
+                if (is_int($str))
                 {
                     // treat as unix time
                     $this->time = $str;
