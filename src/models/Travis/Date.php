@@ -51,7 +51,7 @@ class Date {
             else
             {
                 // else if number...
-                if (is_int($str))
+                if (is_numeric($str))
                 {
                     // treat as unix time
                     $this->time = $str;
@@ -130,23 +130,25 @@ class Date {
      */
     public function reforge($str, $is_new = false)
     {
-        // if not false...
-        if ($this->time !== false)
+        // catch error...
+        if (!$this->time)
         {
-            // amend the time
-            $time = strtotime($str, $this->time);
+            trigger_error('Cannot reforge an invalidate date.');
+        }
 
-            // if conversion fails...
-            if (!$time)
-            {
-                // set time as false
-                $new_time = false;
-            }
-            else
-            {
-                // accept time value
-                $new_time = $time;
-            }
+        // amend the time
+        $time = strtotime($str, $this->time);
+
+        // if conversion fails...
+        if (!$time)
+        {
+            // set time as false
+            $new_time = false;
+        }
+        else
+        {
+            // accept time value
+            $new_time = $time;
         }
 
         // if is new...
