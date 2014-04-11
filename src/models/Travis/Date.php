@@ -101,7 +101,7 @@ class Date {
         if ($this->time !== false)
         {
             // if on windows...
-            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
+            if (static::win32_detect())
             {
                 // return win32 formatted value
                 return static::win32_strftime($str, $this->time);
@@ -319,6 +319,16 @@ class Date {
 
         // return
         return \View::make('date::calendar')->with('map', $map);
+    }
+
+    /**
+     * Detect if server is Windows machine.
+     *
+     * @return  boolean
+     */
+    protected static function win32_detect()
+    {
+        return strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
     }
 
     /**
