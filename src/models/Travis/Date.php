@@ -242,7 +242,7 @@ class Date
         }
 
         // return
-        return number_format($difference).' '.$periods[$j].' '.(isset($negative) ? '' : __('date::date.ago'));
+        return number_format($difference).' '.$periods[$j].' '.(isset($negative) ? '' : 'ago');
     }
 
     /**
