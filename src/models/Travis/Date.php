@@ -213,7 +213,7 @@ class Date
         if (!$time) return false;
 
         // build period and length arrays
-        $periods = array('seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years', 'decades');
+        $periods = array('second', 'minute', 'hour', 'day', 'week', 'month', 'year', 'decade');
         $lengths = array(60, 60, 24, 7, 4.35, 12, 10);
 
         // get difference
