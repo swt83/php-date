@@ -2,8 +2,8 @@
 
 namespace Travis;
 
-class Date {
-
+class Date
+{
     /**
      * Object timestamp.
      *
@@ -21,6 +21,17 @@ class Date {
     {
         $class = __CLASS__;
         return new $class($str);
+    }
+
+    /**
+     * Alias of forge().
+     *
+     * @param   string  $str
+     * @return  object
+     */
+    public static function make($str = null)
+    {
+        return static::forge($str);
     }
 
     /**
@@ -176,6 +187,18 @@ class Date {
     }
 
     /**
+     * Alias of reforge().
+     *
+     * @param   string  $str
+     * @param   boolean $is_new
+     * @return  object
+     */
+    public function remake($str, $is_new = false)
+    {
+        return $this->reforge($str, $is_new);
+    }
+
+    /**
      * Return string of ago value based on current date and time.
      *
      * @return  string
@@ -190,7 +213,7 @@ class Date {
         if (!$time) return false;
 
         // build period and length arrays
-        $periods = array(__('date::date.second'), __('date::date.minute'), __('date::date.hour'), __('date::date.day'), __('date::date.week'), __('date::date.month'), __('date::date.year'), __('date::date.decade'));
+        $periods = array('seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years', 'decades');
         $lengths = array(60, 60, 24, 7, 4.35, 12, 10);
 
         // get difference
@@ -223,7 +246,7 @@ class Date {
     }
 
     /**
-     * Alias of ago() method.
+     * Alias of ago().
      *
      * @return  string
      */
@@ -426,5 +449,4 @@ class Date {
 
         return $class === __CLASS__;
     }
-
 }
