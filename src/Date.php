@@ -332,7 +332,7 @@ class Date
             $map[] = array(
                 'date' => clone $start,
                 'is_today' => $start->format('%F') === $today->format('%F') ? true : false,
-                'is_disabled' => $start->format('%m') === $month ? false : true,
+                'is_disabled' => $start->format('%F') < $today->format('%F') ? false : true,
                 'data' => $closure,
             );
 
