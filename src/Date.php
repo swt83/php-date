@@ -357,7 +357,7 @@ class Date
                 foreach ($map as $day)
                 {
                     // open row
-                    echo $count == 1 ? '<tr>' : '';
+                    $html .= $count == 1 ? '<tr>' : '';
 
                     // load variables
                     $date = $day['date']; // object
