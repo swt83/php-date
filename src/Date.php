@@ -331,7 +331,7 @@ class Date
             // add date to map
             $map[] = array(
                 'date' => clone $start,
-                'is_today' => $start->time() == $today->time() ? true : false,
+                'is_today' => $start->format('%F') == $today->format('%F') ? true : false,
                 'is_disabled' => $start->format('%F') < $today->format('%F') ? true : false,
                 'data' => $closure,
             );
