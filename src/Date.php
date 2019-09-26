@@ -340,8 +340,46 @@ class Date
             $start->reforge('+1 day');
         }
 
+        $html = '<table class="calendar">';
+            $html .= '<thead>';
+                $html .= '<tr>';
+                    $html .= '<th>S</th>';
+                    $html .= '<th>M</th>';
+                    $html .= '<th>T</th>';
+                    $html .= '<th>W</th>';
+                    $html .= '<th>T</th>';
+                    $html .= '<th>F</th>';
+                    $html .= '<th>S</th>';
+                $html .= '</tr>';
+            $html .= '<thead>';
+            $html .= '<tbody>';
+                $count = 1;
+                foreach ($map as $day)
+                {
+                    // open row
+                    echo $count == 1 ? '<tr>' : '';
+
+                    // load variables
+                    $date = $day['date']; // object
+                    $function = $day['data']; // function
+
+                    // print information
+                    $html .= '<td class="'.($day['is_disabled'] ? 'disabled ' : ($day['is_today'] ? 'today ' : '')).'">';
+                        $html .= '<div class="date">'.$date->format('%e').'</div>';
+                        $html .= is_callable($function) ? '<div class="data">'.$function($date).'</div>' : '';
+                    $html .= '</td>';
+
+                    // close row
+                    $html .= $count == 7 ? '</tr>' : '';
+
+                    // increment
+                    $count = $count == 7 ? 1 : $count + 1;
+                }
+            $html .= '</tbody>';
+        $html .= '</table>';
+
         // return
-        return \View::make('date::calendar')->with('map', $map);
+        return $html;
     }
 
     /**
